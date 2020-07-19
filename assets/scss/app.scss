@@ -1,0 +1,338 @@
+@import '/assets/css/reset.css';
+
+@mixin transition($seconds) {
+  transition: all $seconds linear;
+  -webkit-transition: all $seconds linear;
+  -moz-transition: all $seconds linear;
+  -ms-transition: all $seconds linear;
+  -o-transition: all $seconds linear;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+
+  body {
+    margin: 0;
+    font-size: 1.6rem;
+  }
+}
+
+body {
+  background: #1f1f1f;
+}
+
+html,
+p,
+a {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #fff;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+h3 {
+  font-size: 2.8rem;
+}
+
+h4 {
+  font-size: 2.5rem;
+}
+
+button {
+  display: block;
+  padding: 15px 32px;
+  background: transparent;
+  color: #999;
+  border: 0;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  @include transition(.3s);
+
+  &:after {
+    position: absolute;
+    content: '';
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    @include transition(.3s);
+  }
+
+  &:hover {
+    &:after {
+      background: #3397DE;
+    }
+  }
+
+  &.active {
+    color: #fff;
+
+    &:after {
+      background: #3397DE;
+    }
+  }
+}
+
+.container {
+  height: 100vh;
+  padding: 50px 25px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filters {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #888;
+
+  h1 {
+    margin-bottom: 12px;
+    display: block;
+    width: 100%;
+  }
+
+  .filter-btn {
+    width: 25%;
+  }
+}
+
+.grid-section {
+  width: 100%;
+
+  .grid-section__content {
+    position: relative;
+  }
+}
+
+.grid {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .grid-item {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    display: none;
+    z-index: 1;
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+
+    .project-text {
+      color: #fff;
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      z-index: 3;
+      @include transition(.4s);
+
+      h2 {
+        font-size: 2.2rem;
+      }
+    }
+
+    &.active {
+      display: flex;
+      justify-content: flex-start;
+      animation: fadeIn;
+      animation-delay: 0s;
+      animation-duration: 1.2s;
+    }
+
+    &:before {
+      position: absolute;
+      content: '';
+      bottom: 0;
+      left: 0;
+      height: 80%;
+      width: 100%;
+      background: linear-gradient(to top, #000, transparent);
+      opacity: .95;
+      z-index: 2;
+      @include transition(.4s);
+    }
+
+    &:after {
+      position: absolute;
+      content: 'View info';
+      color: #fff;
+      bottom: 0;
+      left: 10px;
+      opacity: 0;
+      transform: translateY(100%) translate3d(0, 0, 0);
+      z-index: 4;
+      @include transition(.4s);
+    }
+
+    &:hover {
+      &:before {
+        height: 100%;
+        opacity: 1;
+      }
+
+      &:after {
+        bottom: 10px;
+        opacity: 1;
+        transform: translateY(0) translate3d(0, 0, 0);
+      }
+
+      .project-text {
+        bottom: 35px;
+      }
+    }
+  }
+
+  .grid-top {
+    width: 100%;
+    order: 1;
+
+    .grid-item {
+      max-width: 100%;
+      height: 400px;
+    }
+  }
+
+  .grid-right {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    order: 2;
+
+    .grid-item {
+      max-width: 32%;
+      height: 250px;
+    }
+  }
+}
+
+// My Work Overlay
+
+.mywork-overlay {
+  position: fixed;
+  width: 380px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 50px;
+  right: auto;
+  background: #333;
+  border: 1px solid #8a8a8a;
+  font-size: 14px;
+  color: #fff;
+  z-index: 1;
+  transition: all .3s linear;
+  transform: translateX(-100%) translate3d(0, 0, 0);
+  transition: transform .2s ease-in-out;
+  z-index: 100;
+
+  // Active Overlay
+  &.active {
+    height: 100%;
+    z-index: 100;
+    transform: translateX(0) translate3d(0, 0, 0);
+
+    .closebtn {
+      position: absolute;
+      content: '';
+      top: 30px;
+      right: 30px;
+      font-size: 3rem;
+      cursor: pointer;
+    }
+  }
+}
+
+// Animations
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+.animate__fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+@-webkit-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0)
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0)
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+  }
+}
+
+.animate__fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp
+}
