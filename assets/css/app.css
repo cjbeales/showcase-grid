@@ -325,11 +325,11 @@ button,
     transform: translateX(0) translate3d(0, 0, 0); }
     .mywork-overlay.active .closebtn {
       position: absolute;
-      content: '';
       top: 10px;
       right: 10px;
       font-size: 2rem;
       opacity: .75;
+      font-family: 'Roboto', sans-serif;
       cursor: pointer; }
       .mywork-overlay.active .closebtn:hover {
         color: #3397DE;

@@ -343,11 +343,11 @@ button,
 
     .closebtn {
       position: absolute;
-      content: '';
       top: 10px;
       right: 10px;
       font-size: 2rem;
       opacity: .75;
+      font-family: 'Roboto', sans-serif;
       cursor: pointer;
 
       &:hover {
