@@ -1,6 +1,7 @@
 var gridItem = document.querySelectorAll('.grid-item');
 var showcaseItem = document.querySelectorAll('.showcase');
 var filterBtn = document.querySelectorAll('.filter-btn');
+let overlays = document.querySelectorAll('.mywork-overlay');
 
 function getAttributes(event) {
   event.preventDefault();
@@ -44,13 +45,27 @@ function viewOverlay(event) {
   event.preventDefault();
   let thisValue = event.target.getAttribute('data-project');
   let thisBtn = event.target;
+  var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 
   for (let a = 0; a < workOverlay.length; a++) {
     const projectFilterAttr = workOverlay[a].getAttribute('data-projectType');
 
     if (thisValue == projectFilterAttr) {
+      if (viewportWidth <= 550) {
+        document.body.style.overflow = "hidden"
+      }
+      for (let i = 0; i < workOverlay.length; i++) {
+        workOverlay[i].classList.remove('active')
+      }
+      if (viewportWidth >= 550) {
+        document.body.style.overflow = "visible"
+      }
       workOverlay[a].classList.toggle('active');
     }
+
+    // Mobile Viewport
+
+
   }
 }
 

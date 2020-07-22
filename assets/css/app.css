@@ -8,6 +8,9 @@
   :root body {
     margin: 0;
     font-size: 1.6rem; }
+    :root body.no-scroll {
+      height: 100%;
+      overflow: hidden; }
 
 body {
   background: #1f1f1f; }
@@ -17,6 +20,11 @@ p,
 a {
   font-family: 'Roboto', sans-serif; }
 
+p {
+  display: block;
+  margin: 15px 0;
+  line-height: 1.4; }
+
 h1,
 h2,
 h3,
@@ -25,7 +33,8 @@ h4 {
   color: #fff; }
 
 h1 {
-  font-size: 4rem; }
+  font-size: 3.5rem;
+  text-transform: uppercase; }
 
 h2 {
   font-size: 3.5rem; }
@@ -36,7 +45,8 @@ h3 {
 h4 {
   font-size: 2.5rem; }
 
-button {
+button,
+.button {
   display: block;
   padding: 15px 32px;
   background: transparent;
@@ -52,7 +62,8 @@ button {
   -moz-transition: all 0.3s linear;
   -ms-transition: all 0.3s linear;
   -o-transition: all 0.3s linear; }
-  button:after {
+  button:after,
+  .button:after {
     position: absolute;
     content: '';
     bottom: -2px;
@@ -64,12 +75,44 @@ button {
     -moz-transition: all 0.3s linear;
     -ms-transition: all 0.3s linear;
     -o-transition: all 0.3s linear; }
-  button:hover:after {
+    @media all and (max-width: 550px) {
+      button:after,
+      .button:after {
+        height: 0;
+        width: 0; } }
+  button:hover:after,
+  .button:hover:after {
     background: #3397DE; }
-  button.active {
+  button.active,
+  .button.active {
     color: #fff; }
-    button.active:after {
+    @media all and (max-width: 550px) {
+      button.active,
+      .button.active {
+        background: #3397DE;
+        color: #fff; } }
+    button.active:after,
+    .button.active:after {
       background: #3397DE; }
+
+.overlay-btn {
+  background: transparent;
+  border: 2px solid #888;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 32px;
+  font-size: 1.5rem;
+  letter-spacing: .5px;
+  color: #888;
+  text-transform: none;
+  text-decoration: none; }
+  .overlay-btn:after {
+    display: none; }
+  .overlay-btn:hover {
+    color: #fff;
+    border: 2px solid #fff;
+    background: #3397DE; }
 
 .container {
   height: 100vh;
@@ -100,12 +143,18 @@ button {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   border-bottom: 2px solid #888; }
+  @media all and (max-width: 550px) {
+    .filters {
+      border-bottom: 0; } }
   .filters h1 {
     margin-bottom: 12px;
     display: block;
     width: 100%; }
   .filters .filter-btn {
     width: 25%; }
+    @media all and (max-width: 550px) {
+      .filters .filter-btn {
+        width: 50%; } }
 
 .grid-section {
   width: 100%; }
@@ -212,6 +261,12 @@ button {
     .grid .grid-top .grid-item {
       max-width: 100%;
       height: 400px; }
+      @media all and (max-width: 750px) {
+        .grid .grid-top .grid-item {
+          height: 350px; } }
+      @media all and (max-width: 550px) {
+        .grid .grid-top .grid-item {
+          height: 250px; } }
   .grid .grid-right {
     width: 100%;
     display: -webkit-box;
@@ -228,17 +283,24 @@ button {
     .grid .grid-right .grid-item {
       max-width: 32%;
       height: 250px; }
+      @media all and (max-width: 750px) {
+        .grid .grid-right .grid-item {
+          max-width: 48.5%; } }
+      @media all and (max-width: 550px) {
+        .grid .grid-right .grid-item {
+          max-width: 100%; } }
 
 .mywork-overlay {
   position: fixed;
   width: 380px;
   height: 100%;
+  min-height: 100vh;
   top: 0;
   left: 0;
-  padding: 50px;
+  padding: 50px 25px;
   right: auto;
-  background: #333;
-  border: 1px solid #8a8a8a;
+  background: #000;
+  border-right: 1px solid #8a8a8a;
   font-size: 14px;
   color: #fff;
   z-index: 1;
@@ -253,6 +315,9 @@ button {
   transition: transform .2s ease-in-out;
   transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
   z-index: 100; }
+  @media all and (max-width: 550px) {
+    .mywork-overlay {
+      width: 100%; } }
   .mywork-overlay.active {
     height: 100%;
     z-index: 100;
@@ -261,10 +326,27 @@ button {
     .mywork-overlay.active .closebtn {
       position: absolute;
       content: '';
-      top: 30px;
-      right: 30px;
-      font-size: 3rem;
+      top: 10px;
+      right: 10px;
+      font-size: 2rem;
+      opacity: .75;
       cursor: pointer; }
+      .mywork-overlay.active .closebtn:hover {
+        color: #3397DE;
+        opacity: 1; }
+  .mywork-overlay .overlay-image {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 20px;
+    background-size: cover;
+    background-position: center center; }
+  .mywork-overlay h1 {
+    margin-bottom: 32px; }
+  .mywork-overlay h3 {
+    font-size: 2.5rem; }
+  .mywork-overlay p {
+    opacity: .75;
+    font-weight: 300; }
 
 @-webkit-keyframes fadeIn {
   0% {
